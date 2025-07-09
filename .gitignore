@@ -1,10 +1,32 @@
-# Python
+# --- Python Virtual Environments ---
 venv/
+.venv/
+env/
+.env
+
+# --- Python Cache & Compiled Files ---
 __pycache__/
 *.pyc
+*.pyo
+*.pyd
 
-# Environment variables
-.env
+# --- IDE & System Files ---
+.vscode/
+.idea/
+*.DS_Store
+jpserver-*.html
+
+# --- Project-Specific Artifacts ---
+# Local training outputs and logs
+/llm-detector/
+/logs/
+
+# Raw data (should be downloaded by script)
+/data/
 
 # Jupyter Notebook Checkpoints
 .ipynb_checkpoints/
+
+# --- Sensitive Information ---
+# Handled by .env rule above, but good to be explicit
+*.env

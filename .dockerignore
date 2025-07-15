@@ -1,0 +1,36 @@
+# .dockerignore
+
+# Ignore the virtual environment
+venv/
+.venv/
+
+# Ignore Git directory
+.git/
+.gitignore
+
+# Ignore large data and model training files
+data/
+*.ipynb
+.ipynb_checkpoints/
+
+# Ignore sub-project folders not needed for this app
+llm-detector/
+
+# Ignore utility/test scripts not part of the core app
+check_login.py
+quicktest.py
+
+# --- STANDARD PYTHON/IDE/ENV IGNORES ---
+
+# Ignore Python cache files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Ignore IDE/editor-specific files
+.idea/
+.vscode/
+
+# Ignore environment files
+.env

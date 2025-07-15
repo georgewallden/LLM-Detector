@@ -24,8 +24,9 @@ jpserver-*.html
 # Raw data (should be downloaded by script)
 /data/
 
-# Jupyter Notebook Checkpoints
+# Jupyter Notebook Checkpoints AND NOTEBOOKS
 .ipynb_checkpoints/
+*.ipynb             # <--- ADD THIS LINE
 
 # --- Sensitive Information ---
 # Handled by .env rule above, but good to be explicit

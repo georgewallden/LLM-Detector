@@ -1,9 +1,35 @@
-transformers[torch]
-datasets
-kaggle
-huggingface-hub
-python-dotenv
-jupyterlab
-scikit-learn
-fastapi
-uvicorn[standard]
+# ==============================================================================
+# == Production Requirements for LLM Detector API (CPU-Optimized)
+# =================================e==============================================
+# This file lists the minimal dependencies needed to RUN the application in
+# a production environment (like our Docker container). It is optimized for
+# a CPU-only server to minimize image size and startup time.
+
+# --- PyTorch CPU-Only Installation ---
+# --extra-index-url tells pip to check the standard PyPI AND this special
+# repository, which is necessary to find all packages.
+--extra-index-url https://download.pytorch.org/whl/cpu
+
+# 'torch' library for tbe NLP task.
+torch
+
+# --- Core Application & Inference Dependencies ---
+fastapi             # The web framework
+uvicorn[standard]   # The server that runs the app
+transformers        # For loading the Hugging Face model
+sentencepiece       # A tokenizer dependency for many transformers
+accelerate          # Helper library for PyTorch execution
+
+# ==============================================================================
+# == Development & Training Dependencies (REMOVED for Production)
+# ==============================================================================
+# The following libraries were used during the development, training, and
+# evaluation phases. They are not needed for the final inference server
+# and are removed to create a lean, secure, and efficient production image.
+#
+# datasets          # Used to download and preprocess the training data
+# kaggle            # Used to download the original dataset from Kaggle
+# huggingface-hub   # Used to upload the fine-tuned model to the Hub
+# python-dotenv     # Used for loading local .env files in development
+# jupyterlab        # The IDE for running training notebooks
+# scikit-learn      # Used for calculating evaluation metrics (F1, etc.)

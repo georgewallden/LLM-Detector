@@ -30,8 +30,15 @@ class IdleWatchdog:
             time.sleep(10)
 
     def update_last_active_time(self):
-        """Resets the idle timer. Should be called by the main application."""
+        """Resets the idle timer and prints the new scheduled shutdown time."""
         with self.lock:
             self.last_active_time = datetime.datetime.now()
-            # --- ADD THIS LINE BACK IN FOR CLEARER TESTING LOGS ---
-            print("--- Watchdog: Activity detected, timer reset. ---")
+            
+            # Calculate the new shutdown time by adding the timeout to the current time
+            shutdown_time = self.last_active_time + self.timeout
+            
+            # Format it into a readable string
+            formatted_time = shutdown_time.strftime("%Y-%m-%d %H:%M:%S")
+
+            # Replace the old print with this more informative one
+            print(f"--- Watchdog: Timer reset. New shutdown scheduled for: {formatted_time} ---")

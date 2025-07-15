@@ -1,0 +1,83 @@
+/* style.css */
+
+/* --- Basic Setup & Modern Font --- */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+    background-color: #f4f7f6;
+    color: #333;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* --- Page Layout Containers --- */
+header, main, footer {
+    width: 90%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+main {
+    flex-grow: 1; /* This makes the main content area grow to fill available space */
+}
+
+header {
+    text-align: center;
+    border-bottom: 2px solid #ddd;
+}
+
+footer {
+    text-align: center;
+    font-size: 0.9em;
+    color: #777;
+    margin-top: 40px;
+}
+
+/* --- Detector UI Elements --- */
+.detector-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Adds space between the textarea and the button */
+}
+
+textarea {
+    width: 100%;
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    box-sizing: border-box; /* Ensures padding doesn't add to the width */
+    resize: vertical; /* Allows user to resize the textarea vertically */
+}
+
+button {
+    padding: 15px 20px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* --- Result Display --- */
+.result-container {
+    margin-top: 40px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.hidden {
+    display: none; /* We'll use JavaScript to remove this class to show the results */
+}

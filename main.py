@@ -1,5 +1,6 @@
 # main.py
 from fastapi import FastAPI, Request, HTTPException, status
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from transformers import pipeline
 import torch
@@ -8,17 +9,33 @@ import torch
 from watchdog import IdleWatchdog
 from request_limiter import RequestLimiter
 
+
+# for dev work setting up all cross origin stuff for ease.
+origins = [
+    # In production, you would lock this down to your specific frontend domain,
+    # e.g., "https://georgewallden.com"
+    "*" # For local development, we allow all origins.
+]
+
+
 # --- 1. Create the App and Load the Model ---
 
 # Create the FastAPI app instance. This is the main point of interaction.
 app = FastAPI(title="LLM Detector API", version="1.0.0")
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"], # Allow all methods (GET, POST, etc.)
+    allow_headers=["*"], # Allow all headers
+)
 
 # Start up a timer that will close the container after not being used.
 # Defaults to 900s (15 min)
 watchdog = IdleWatchdog(timeout_seconds=900)
 # watchdog = IdleWatchdog(timeout_seconds=15) <- test value
 limiter = RequestLimiter(max_requests=5)
-
 
 
 # --- 2. Pydantic Models for API Data Structure ---

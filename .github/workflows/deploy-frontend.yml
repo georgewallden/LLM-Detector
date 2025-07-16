@@ -1,0 +1,48 @@
+# .github/workflows/deploy-frontend.yml
+
+name: Deploy Frontend to S3 and CloudFront
+
+# This workflow runs on pushes to the 'main' branch
+on:
+  push:
+    branches:
+      - main
+    # BUT, only if files in these paths have changed
+    paths:
+      - 'index.html'
+      - 'style.css'
+      - 'script.js'
+      - 'config.js'
+      - 'corgi-photos/**' # The /** matches any file inside the folder
+
+jobs:
+  deploy:
+    name: Deploy Frontend
+    runs-on: ubuntu-latest
+    
+    # These permissions are required for the OIDC flow to work
+    permissions:
+      id-token: write # This is required for assuming the IAM role
+      contents: read   # This is required for actions/checkout
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Configure AWS credentials from OIDC
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          # Use the role ARN you stored in GitHub Secrets
+          role-to-assume: ${{ secrets.AWS_IAM_ROLE_ARN }}
+          aws-region: us-east-1 # Change if your region is different
+
+      - name: Deploy static site to S3 bucket
+        # The sync command is efficient; it only copies changed files.
+        # The --delete flag removes files from S3 that are no longer in your repo.
+        run: |
+          aws s3 sync . s3://georgewallden.com --delete
+
+      - name: Invalidate CloudFront cache
+        run: |
+          # You need to replace this placeholder with your actual CloudFront Distribution ID
+          aws cloudfront create-invalidation --distribution-id E2ZL7HX4ZYZ96R --paths "/*"

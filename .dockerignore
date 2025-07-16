@@ -37,3 +37,6 @@ __pycache__/
 
 # Ignore training files
 training-files/
+
+# Ignore github actions
+.github/

@@ -36,7 +36,7 @@ jobs:
         # The sync command is efficient; it only copies changed files.
         # The --delete flag removes files from S3 that are no longer in your repo.
         run: |
-          cd llm-detector && aws s3 sync . s3://georgewallden.com/llm-detector --delete
+          cd llm-detector && aws s3 sync . s3://www.georgewallden.com/llm-detector --delete
 
       - name: Invalidate CloudFront cache
         run: |

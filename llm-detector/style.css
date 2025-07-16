@@ -219,7 +219,6 @@ textarea:focus {
     font-style: italic;
 }
 
-/* Styles the main paragraph in the asleep UI, but not the tech-detail one */
 #server-asleep-ui p:not(.tech-detail) {
     max-width: 45ch;
     margin-inline: auto;
@@ -228,7 +227,7 @@ textarea:focus {
 
 .links-section {
     padding: 1rem;
-    margin-block-start: 1rem;
+    margin-block: 1rem;
 }
 
 .link-list {
@@ -240,4 +239,23 @@ textarea:focus {
 
 .hidden {
     display: none;
+}
+
+/* --- 7. Responsive Design --- */
+@media (max-width: 600px) {
+    .site-header {
+        padding: 2.5rem 1rem;
+    }
+
+    h1 {
+        font-size: 2.2rem;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    .card {
+        padding: 2rem 1.5rem;
+    }
 }

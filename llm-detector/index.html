@@ -21,14 +21,13 @@
     <header class="site-header">
         <div class="header-content">
             <h1>LLM Detector</h1>
-            <!-- 1. Here is the updated, more descriptive subtitle -->
             <p class="subtitle">A tool powered by a custom-trained LLM from Hugging Face to determine if text was written by a human or an AI.</p>
         </div>
     </header>
 
     <main class="main-content">
-        <!-- Main UI -->
-        <section id="detector-ui" class="detector-container hidden">
+        <!-- Main UI now includes the .card class -->
+        <section id="detector-ui" class="card detector-container hidden">
             <textarea
                 id="text-input"
                 placeholder="Enter text here to analyze..."
@@ -37,42 +36,38 @@
             <button id="submit-btn" class="button">Analyze Text</button>
         </section>
 
-        <!-- "Server Asleep" UI -->
-        <section id="server-asleep-ui" class="detector-container">
+        <!-- "Server Asleep" UI now includes the .card class -->
+        <section id="server-asleep-ui" class="card detector-container">
             <figure class="corgi-container">
                 <img id="corgi-img" src="" alt="A sleeping corgi named Bolt">
                 <figcaption class="corgi-caption">this is my dog bolt, he is a good boy</figcaption>
             </figure>
             
             <h2>Zzz... The Model is Sleeping!</h2>
-            <!-- 2. Here is the new personalized message -->
-            <p>To save on cloud costs, I set the server to power down after inactivity.</p>
+            <p>To save on cloud costs, I've configured the ECS Cluster to scale down to zero tasks after inactivity.</p>
             <button id="wakeup-btn" class="button">Wake Up Model</button>
         </section>
 
-        <!-- Results UI -->
-        <section id="result-container" class="result-container hidden" aria-live="polite">
+        <!-- Results UI now includes the .card class -->
+        <section id="result-container" class="card result-container hidden" aria-live="polite">
             <h2>Analysis Result</h2>
             <div id="result-display"></div>
         </section>
     </main>
     
-    <!-- 3. Here is the new links section -->
     <section class="links-section">
         <div class="link-list">
             <a href="https://github.com/georgewallden/LLM-Detector" target="_blank" rel="noopener noreferrer" class="button button--outline">
-                <!-- For a pro touch, you can place an SVG icon here -->
-                View on GitHub
+                🐙 View on GitHub
             </a>
             <a href="https://huggingface.co/George-Wallden/llm-detector" target="_blank" rel="noopener noreferrer" class="button button--outline">
-                <!-- For a pro touch, you can place an SVG icon here -->
-                View on Hugging Face
+                🤗 View on Hugging Face
             </a>
         </div>
     </section>
 
     <footer class="site-footer">
-        <p>A Portfolio Project by <a href="https://github.com/georgewallden" target="_blank" rel="noopener noreferrer">George Wallden</a>.</p>
+        <p>A Portfolio Project by <a href="https://www.linkedin.com/in/george-wallden" target="_blank" rel="noopener noreferrer">George Wallden <svg class="footer-link-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"></path></svg></a></p>
     </footer>
 
 </body>

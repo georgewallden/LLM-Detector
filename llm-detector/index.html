@@ -21,7 +21,8 @@
     <header class="site-header">
         <div class="header-content">
             <h1>LLM Detector</h1>
-            <p class="subtitle">A tool to determine if text was written by a human or an AI.</p>
+            <!-- 1. Here is the updated, more descriptive subtitle -->
+            <p class="subtitle">A tool powered by a custom-trained LLM from Hugging Face to determine if text was written by a human or an AI.</p>
         </div>
     </header>
 
@@ -38,14 +39,14 @@
 
         <!-- "Server Asleep" UI -->
         <section id="server-asleep-ui" class="detector-container">
-            <!-- This is the updated section with <figure> for Bolt -->
             <figure class="corgi-container">
                 <img id="corgi-img" src="" alt="A sleeping corgi named Bolt">
                 <figcaption class="corgi-caption">this is my dog bolt, he is a good boy</figcaption>
             </figure>
             
             <h2>Zzz... The Model is Sleeping!</h2>
-            <p>To save on cloud costs, the server powers down after inactivity.</p>
+            <!-- 2. Here is the new personalized message -->
+            <p>To save on cloud costs, I set the server to power down after inactivity.</p>
             <button id="wakeup-btn" class="button">Wake Up Model</button>
         </section>
 
@@ -55,9 +56,23 @@
             <div id="result-display"></div>
         </section>
     </main>
+    
+    <!-- 3. Here is the new links section -->
+    <section class="links-section">
+        <div class="link-list">
+            <a href="https://github.com/georgewallden/LLM-Detector" target="_blank" rel="noopener noreferrer" class="button button--outline">
+                <!-- For a pro touch, you can place an SVG icon here -->
+                View on GitHub
+            </a>
+            <a href="https://huggingface.co/George-Wallden/llm-detector" target="_blank" rel="noopener noreferrer" class="button button--outline">
+                <!-- For a pro touch, you can place an SVG icon here -->
+                View on Hugging Face
+            </a>
+        </div>
+    </section>
 
     <footer class="site-footer">
-        <p>A Portfolio Project by <a href="#">George Wallden</a>.</p>
+        <p>A Portfolio Project by <a href="https://github.com/georgewallden" target="_blank" rel="noopener noreferrer">George Wallden</a>.</p>
     </footer>
 
 </body>

@@ -6,48 +6,46 @@
     <title>LLM Detector</title>
     <link rel="stylesheet" href="style.css">
 
-    <!-- Load config first, so its variables are available to script.js -->
+    <!-- A good practice to place config first -->
     <script src="config.js"></script>
     <script src="script.js" defer></script>
 </head>
 <body>
 
-    <header>
+    <header class="site-header">
         <h1>LLM Detector</h1>
-        <p>A tool to determine if text was written by a human or an AI.</p>
+        <p class="subtitle">A tool to determine if text was written by a human or an AI.</p>
     </header>
 
     <main>
         <!-- This is the main UI, which is interactive when the server is awake -->
-        <!-- It starts as hidden, and our script will un-hide it. -->
         <section id="detector-ui" class="detector-container hidden">
-            <textarea 
-                id="text-input" 
+            <textarea
+                id="text-input"
                 placeholder="Enter text here to analyze..."
                 rows="10"
             ></textarea>
-            <button id="submit-btn">Analyze Text</button>
+            <button id="submit-btn" class="button">Analyze Text</button>
         </section>
 
         <!-- This is the "sleeping" UI, shown when the server is off -->
-        <!-- It starts visible, and our script will hide it when the server wakes up. -->
         <section id="server-asleep-ui" class="detector-container">
-            <!-- The 'src' for the image will be set by our JavaScript -->
-            <img id="corgi-img" src="" alt="A sleeping corgi" style="max-width: 200px; margin: 0 auto; border-radius: 8px;">
+            <!-- The 'src' for the image will be set by JavaScript -->
+            <img id="corgi-img" src="" alt="A sleeping corgi">
             <h2>Zzz... The Model is Sleeping!</h2>
-            <p style="text-align: center;">To save on cloud costs, the server automatically powers down after a period of inactivity.</p>
-            <button id="wakeup-btn">Wake Up Model</button>
+            <p>To save on cloud costs, the server automatically powers down after a period of inactivity.</p>
+            <button id="wakeup-btn" class="button">Wake Up Model</button>
         </section>
 
-        <!-- This is where the results will be displayed, hidden by default -->
-        <section id="result-container" class="hidden">
+        <!-- This is where the results will be displayed -->
+        <section id="result-container" class="result-container hidden" aria-live="polite">
             <h2>Analysis Result</h2>
             <div id="result-display"></div>
         </section>
     </main>
 
-    <footer>
-        <p>A Portfolio Project by George Wallden.</p>
+    <footer class="site-footer">
+        <p>A Portfolio Project by <a href="#">George Wallden</a>.</p>
     </footer>
 
 </body>

@@ -1,83 +1,177 @@
 /* style.css */
 
-/* --- Basic Setup & Modern Font --- */
+/* --- 1. Foundational Setup & CSS Variables --- */
+:root {
+    --color-primary: #007bff;
+    --color-primary-dark: #0056b3;
+    --color-text: #212529;
+    --color-text-muted: #6c757d;
+    --color-background: #f8f9fa;
+    --color-surface: #ffffff;
+    --color-border: #dee2e6;
+    --border-radius: 8px;
+    --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    --transition-speed: 0.2s;
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
 body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     line-height: 1.6;
-    background-color: #f4f7f6;
-    color: #333;
+    background-color: var(--color-background);
+    color: var(--color-text);
     margin: 0;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
 }
 
-/* --- Page Layout Containers --- */
-header, main, footer {
+/* --- 2. Page Layout & Structure --- */
+.site-header, main, .site-footer {
     width: 90%;
     max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
+    margin-inline: auto; /* Modern equivalent of 'margin-left: auto; margin-right: auto;' */
+    padding: 2rem 1rem;
 }
 
 main {
-    flex-grow: 1; /* This makes the main content area grow to fill available space */
+    flex-grow: 1;
 }
 
-header {
+.site-header {
     text-align: center;
-    border-bottom: 2px solid #ddd;
+    border-bottom: 1px solid var(--color-border);
+    padding-block: 2.5rem; /* More vertical space */
 }
 
-footer {
+.site-header h1 {
+    margin-block: 0 0.5rem; /* Spacing between h1 and subtitle */
+}
+
+.site-header .subtitle {
+    font-size: 1.1rem;
+    color: var(--color-text-muted);
+    margin: 0;
+}
+
+.site-footer {
     text-align: center;
     font-size: 0.9em;
-    color: #777;
-    margin-top: 40px;
+    color: var(--color-text-muted);
+    margin-block-start: 2.5rem; /* 'margin-top' */
+    padding-block: 1.5rem;
 }
 
-/* --- Detector UI Elements --- */
+.site-footer a {
+    color: var(--color-primary);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.site-footer a:hover {
+    text-decoration: underline;
+}
+
+/* --- 3. Main Detector UI & Components --- */
 .detector-container {
     display: flex;
     flex-direction: column;
-    gap: 15px; /* Adds space between the textarea and the button */
+    gap: 1rem;
+    text-align: center; /* Center the "Sleeping" UI content */
 }
 
 textarea {
     width: 100%;
-    padding: 15px;
-    border-radius: 8px;
-    border: 1px solid #ccc;
+    padding: 1rem;
+    border-radius: var(--border-radius);
+    border: 1px solid var(--color-border);
     font-size: 1rem;
-    box-sizing: border-box; /* Ensures padding doesn't add to the width */
-    resize: vertical; /* Allows user to resize the textarea vertically */
+    font-family: inherit; /* Ensures textarea uses the body font */
+    resize: vertical;
+    transition: border-color var(--transition-speed), box-shadow var(--transition-speed);
 }
 
-button {
-    padding: 15px 20px;
+textarea:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+}
+
+.button {
+    padding: 0.8rem 1.5rem;
     font-size: 1.1rem;
     font-weight: bold;
     color: #fff;
-    background-color: #007bff;
+    background-color: var(--color-primary);
     border: none;
-    border-radius: 8px;
+    border-radius: var(--border-radius);
     cursor: pointer;
-    transition: background-color 0.2s ease-in-out;
+    transition: background-color var(--transition-speed), transform var(--transition-speed);
+    align-self: center; /* Makes buttons in flex containers only as wide as their content */
 }
 
-button:hover {
-    background-color: #0056b3;
+.button:hover {
+    background-color: var(--color-primary-dark);
 }
 
-/* --- Result Display --- */
+.button:active {
+    transform: scale(0.98); /* Gives a nice "press" effect */
+}
+
+/* For keyboard users */
+.button:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 3px;
+}
+
+/* --- 4. Specific UI States --- */
+
+/* "Server Asleep" UI elements */
+#corgi-img {
+    max-width: 150px; /* Reduced size slightly for a cleaner look */
+    margin: 0 auto;
+    border-radius: var(--border-radius);
+    margin-block-end: 1rem; /* Replaces the old inline style */
+}
+
+#server-asleep-ui h2 {
+    margin-block: 0.5rem;
+}
+
+#server-asleep-ui p {
+    max-width: 45ch; /* Limits line length for better readability */
+    margin-inline: auto;
+}
+
+/* "Results" UI */
 .result-container {
-    margin-top: 40px;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    margin-block-start: 2.5rem;
+    padding: 2rem;
+    background-color: var(--color-surface);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    opacity: 0; /* Use opacity for a fade-in effect */
+    transform: translateY(10px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
 }
 
+/* We'll change the 'hidden' class logic slightly in our minds */
+/* Instead of display:none, we control visibility to allow for animation */
 .hidden {
-    display: none; /* We'll use JavaScript to remove this class to show the results */
+    display: none;
+}
+
+/* A potential JS-driven class for smooth appearance */
+.result-container.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+/* --- 5. Utility & Helper Classes --- */
+.hidden {
+    display: none;
 }

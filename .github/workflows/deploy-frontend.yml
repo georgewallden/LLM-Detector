@@ -1,13 +1,11 @@
 # .github/workflows/deploy-frontend.yml
 
-name: Deploy Frontend to S3 and CloudFront
+name: Deploy LLM Detector Frontend
 
-# This workflow runs on pushes to the 'main' branch
 on:
   push:
     branches:
       - main
-    # BUT, only if files in these paths have changed
     paths:
       - 'llm-detector/**'
 
@@ -15,28 +13,36 @@ jobs:
   deploy:
     name: Deploy Frontend
     runs-on: ubuntu-latest
-    
-    # These permissions are required for the OIDC flow to work
     permissions:
-      id-token: write # This is required for assuming the IAM role
-      contents: read   # This is required for actions/checkout
+      id-token: write
+      contents: read
+
+    defaults:
+      run:
+        working-directory: ./llm-detector
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      # NEW STEP: Create config.js from GitHub Secrets
+      - name: Create config.js
+        run: |
+          echo "const API_BASE_URL = '${{ secrets.API_BASE_URL }}';" > config.js
+          echo "const WAKEUP_LAMBDA_URL = '${{ secrets.WAKEUP_LAMBDA_URL }}';" >> config.js
+          echo "--- config.js created successfully ---"
+          cat config.js # This prints the file content to the log for debugging
+
       - name: Configure AWS credentials from OIDC
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          # Use the role ARN you stored in GitHub Secrets
           role-to-assume: ${{ secrets.AWS_IAM_ROLE_ARN }}
-          aws-region: us-east-1 # Change if your region is different
+          aws-region: us-east-1
 
       - name: Deploy static site to S3 bucket
-        # The sync command is efficient; it only copies changed files.
-        # The --delete flag removes files from S3 that are no longer in your repo.
         run: |
-          cd llm-detector && aws s3 sync . s3://www.georgewallden.com/llm-detector --delete
+          # The sync command will now find and upload the dynamically created config.js
+          aws s3 sync . s3://www.georgewallden.com/llm-detector --delete
 
       - name: Invalidate CloudFront cache
         run: |

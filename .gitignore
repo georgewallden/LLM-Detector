@@ -4,6 +4,10 @@ venv/
 env/
 .env
 
+# Wrapper for the files from the model training.
+/training-files/
+
+
 # --- Python Cache & Compiled Files ---
 __pycache__/
 *.pyc
@@ -18,7 +22,6 @@ jpserver-*.html
 
 # --- Project-Specific Artifacts ---
 # Local training outputs and logs
-/llm-detector/
 /logs/
 
 # Raw data (should be downloaded by script)
@@ -31,3 +34,6 @@ jpserver-*.html
 # --- Sensitive Information ---
 # Handled by .env rule above, but good to be explicit
 *.env
+
+# critically, ignore the lambda link so its not publically posted
+/llm-detector/config.js

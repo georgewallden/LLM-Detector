@@ -10,13 +10,11 @@ from watchdog import IdleWatchdog
 from request_limiter import RequestLimiter
 
 
-# for dev work setting up all cross origin stuff for ease.
+# Production-ready CORS configuration
 origins = [
-    # In production, you would lock this down to your specific frontend domain,
-    # e.g., "https://georgewallden.com"
-    "*" # For local development, we allow all origins.
+    # This is the only domain that will be allowed to make requests to our API.
+    "https://www.georgewallden.com"
 ]
-
 
 # --- 1. Create the App and Load the Model ---
 

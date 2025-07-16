@@ -34,3 +34,6 @@ __pycache__/
 
 # Ignore environment files
 .env
+
+# Ignore training files
+training-files/

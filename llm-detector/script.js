@@ -1,6 +1,6 @@
 // llm-detector/script.js
 
-// --- 1. GET REFERENCES --- //
+// --- 1. GET REFERENCES --- ///
 const detectorUI = document.getElementById('detector-ui');
 const serverAsleepUI = document.getElementById('server-asleep-ui');
 const wakeupBtn = document.getElementById('wakeup-btn');

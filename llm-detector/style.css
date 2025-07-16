@@ -52,7 +52,6 @@ body {
     padding: 4rem 1rem 3rem;
 }
 
-/* NEW: Main heading now has brand color */
 .site-header h1 {
     color: var(--color-primary);
 }
@@ -89,6 +88,7 @@ body {
     width: 1em;
     height: 1em;
     fill: currentColor;
+    transition: fill var(--transition-speed);
 }
 
 /* --- 4. Content Typography --- */
@@ -102,15 +102,22 @@ h1 { font-size: 2.5rem; margin-block: 0 0.5rem; }
 h2 { font-size: 1.75rem; margin-block: 0 1rem; }
 .subtitle { font-size: 1.1rem; color: var(--color-text-muted); margin: 0; max-width: 55ch; margin-inline:auto;}
 
-/* --- 5. Main UI Components --- */
+.tech-detail {
+    font-size: 0.85rem;
+    font-style: italic;
+    color: var(--color-text-muted);
+    max-width: 45ch;
+    margin-inline: auto;
+    margin-top: -0.5rem;
+}
 
-/* NEW: .card utility class for our containers */
+
+/* --- 5. Main UI Components --- */
 .card {
     background-color: var(--color-surface);
     border-radius: var(--border-radius);
     box-shadow: var(--shadow);
     padding: 2.5rem;
-    /* NEW: Blue top border for extra pop */
     border-top: 4px solid var(--color-primary);
 }
 
@@ -146,7 +153,7 @@ textarea:focus {
     display: inline-flex;
     align-items: center;
     gap: 0.75rem;
-    padding: 0.8rem 2rem;
+    padding: 0.8rem 1.5rem;
     font-size: 1rem;
     font-weight: 500;
     font-family: var(--font-body);
@@ -158,6 +165,18 @@ textarea:focus {
     transition: all var(--transition-speed) ease;
     text-decoration: none;
     justify-content: center;
+    white-space: nowrap;
+}
+
+.button span {
+    display: inline-block;
+}
+
+.button-icon {
+    width: 1.25em;
+    height: 1.25em;
+    fill: currentColor;
+    transition: fill var(--transition-speed) ease;
 }
 
 .button:hover {
@@ -166,7 +185,9 @@ textarea:focus {
     transform: translateY(-2px);
 }
 
-.button:active { transform: translateY(0); }
+.button:active {
+    transform: translateY(0);
+}
 
 .button--outline {
     background-color: transparent;
@@ -180,11 +201,43 @@ textarea:focus {
 }
 
 /* --- 6. Specific UI States & Links Section --- */
-.corgi-container { animation: breathe 4s ease-in-out infinite; }
-#corgi-img { max-width: 140px; border-radius: 50%; box-shadow: 0 4px 15px rgba(0,0,0,0.1); margin-bottom: 1.5rem; }
-.corgi-caption { font-size: 0.85rem; color: var(--color-text-muted); margin-top: -1rem; font-style: italic; }
-#server-asleep-ui p { max-width: 45ch; margin-inline: auto; color: var(--color-text-muted); }
+.corgi-container {
+    animation: breathe 4s ease-in-out infinite;
+}
 
-.links-section { padding: 1rem; margin-block-start: 1rem; }
-.link-list { display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; }
-.hidden { display: none; }
+#corgi-img {
+    max-width: 140px;
+    border-radius: 50%;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    margin-bottom: 1.5rem;
+}
+
+.corgi-caption {
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    margin-top: -1rem;
+    font-style: italic;
+}
+
+/* Styles the main paragraph in the asleep UI, but not the tech-detail one */
+#server-asleep-ui p:not(.tech-detail) {
+    max-width: 45ch;
+    margin-inline: auto;
+    color: var(--color-text-muted);
+}
+
+.links-section {
+    padding: 1rem;
+    margin-block-start: 1rem;
+}
+
+.link-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.hidden {
+    display: none;
+}

@@ -4,21 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LLM Detector</title>
+
+    <!-- Google Fonts: Poppins for headings, Inter for body text -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+    
     <link rel="stylesheet" href="style.css">
 
-    <!-- A good practice to place config first -->
+    <!-- Scripts -->
     <script src="config.js"></script>
     <script src="script.js" defer></script>
 </head>
 <body>
 
     <header class="site-header">
-        <h1>LLM Detector</h1>
-        <p class="subtitle">A tool to determine if text was written by a human or an AI.</p>
+        <div class="header-content">
+            <h1>LLM Detector</h1>
+            <p class="subtitle">A tool to determine if text was written by a human or an AI.</p>
+        </div>
     </header>
 
-    <main>
-        <!-- This is the main UI, which is interactive when the server is awake -->
+    <main class="main-content">
+        <!-- Main UI -->
         <section id="detector-ui" class="detector-container hidden">
             <textarea
                 id="text-input"
@@ -28,16 +36,20 @@
             <button id="submit-btn" class="button">Analyze Text</button>
         </section>
 
-        <!-- This is the "sleeping" UI, shown when the server is off -->
+        <!-- "Server Asleep" UI -->
         <section id="server-asleep-ui" class="detector-container">
-            <!-- The 'src' for the image will be set by JavaScript -->
-            <img id="corgi-img" src="" alt="A sleeping corgi">
+            <!-- This is the updated section with <figure> for Bolt -->
+            <figure class="corgi-container">
+                <img id="corgi-img" src="" alt="A sleeping corgi named Bolt">
+                <figcaption class="corgi-caption">this is my dog bolt, he is a good boy</figcaption>
+            </figure>
+            
             <h2>Zzz... The Model is Sleeping!</h2>
-            <p>To save on cloud costs, the server automatically powers down after a period of inactivity.</p>
+            <p>To save on cloud costs, the server powers down after inactivity.</p>
             <button id="wakeup-btn" class="button">Wake Up Model</button>
         </section>
 
-        <!-- This is where the results will be displayed -->
+        <!-- Results UI -->
         <section id="result-container" class="result-container hidden" aria-live="polite">
             <h2>Analysis Result</h2>
             <div id="result-display"></div>

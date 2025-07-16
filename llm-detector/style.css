@@ -1,17 +1,25 @@
 /* style.css */
 
-/* --- 1. Foundational Setup & CSS Variables --- */
+/* --- 1. Foundational Setup & Design System --- */
 :root {
-    --color-primary: #007bff;
-    --color-primary-dark: #0056b3;
-    --color-text: #212529;
-    --color-text-muted: #6c757d;
-    --color-background: #f8f9fa;
+    /* Color Palette */
+    --color-primary: #1a73e8;
+    --color-primary-dark: #1662c4;
+    --color-text: #202124;
+    --color-text-muted: #5f6368;
     --color-surface: #ffffff;
-    --color-border: #dee2e6;
-    --border-radius: 8px;
-    --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-    --transition-speed: 0.2s;
+    --color-border: #dadce0;
+    --color-background-start: #e8f0fe;
+    --color-background-end: #f8f9fa;
+
+    /* Typography */
+    --font-heading: 'Poppins', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    --font-body: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+    /* Spacing & Style */
+    --border-radius: 12px;
+    --shadow: 0 1px 2px rgba(0,0,0,0.06), 0 4px 12px rgba(0,0,0,0.1);
+    --transition-speed: 0.25s;
 }
 
 *, *::before, *::after {
@@ -19,50 +27,47 @@
 }
 
 body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-family: var(--font-body);
     line-height: 1.6;
-    background-color: var(--color-background);
     color: var(--color-text);
     margin: 0;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    background-image: linear-gradient(180deg, var(--color-background-start) 0%, var(--color-background-end) 50%);
+    background-attachment: fixed;
 }
 
-/* --- 2. Page Layout & Structure --- */
-.site-header, main, .site-footer {
-    width: 90%;
-    max-width: 800px;
-    margin-inline: auto; /* Modern equivalent of 'margin-left: auto; margin-right: auto;' */
-    padding: 2rem 1rem;
+/* --- 2. Animations --- */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
-main {
-    flex-grow: 1;
+@keyframes breathe {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
 }
 
+/* --- 3. Page Layout & Structure --- */
 .site-header {
     text-align: center;
-    border-bottom: 1px solid var(--color-border);
-    padding-block: 2.5rem; /* More vertical space */
+    padding: 4rem 1rem 3rem;
 }
 
-.site-header h1 {
-    margin-block: 0 0.5rem; /* Spacing between h1 and subtitle */
-}
-
-.site-header .subtitle {
-    font-size: 1.1rem;
-    color: var(--color-text-muted);
-    margin: 0;
+.main-content {
+    width: 90%;
+    max-width: 700px;
+    margin-inline: auto;
+    flex-grow: 1;
+    animation: fadeIn 0.8s ease-out backwards;
 }
 
 .site-footer {
     text-align: center;
     font-size: 0.9em;
     color: var(--color-text-muted);
-    margin-block-start: 2.5rem; /* 'margin-top' */
-    padding-block: 1.5rem;
+    padding: 2.5rem 1rem;
 }
 
 .site-footer a {
@@ -75,12 +80,27 @@ main {
     text-decoration: underline;
 }
 
-/* --- 3. Main Detector UI & Components --- */
+/* --- 4. Content Typography --- */
+h1, h2 {
+    font-family: var(--font-heading);
+    color: var(--color-text);
+    font-weight: 600;
+}
+
+h1 { font-size: 2.5rem; margin-block: 0 0.5rem; }
+h2 { font-size: 1.75rem; margin-block: 0 1rem; }
+.subtitle { font-size: 1.1rem; color: var(--color-text-muted); margin: 0; max-width: 40ch; margin-inline:auto;}
+
+/* --- 5. Main UI Components --- */
 .detector-container {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
-    text-align: center; /* Center the "Sleeping" UI content */
+    gap: 1.5rem;
+    padding: 2.5rem;
+    background-color: var(--color-surface);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    text-align: center;
 }
 
 textarea {
@@ -89,7 +109,7 @@ textarea {
     border-radius: var(--border-radius);
     border: 1px solid var(--color-border);
     font-size: 1rem;
-    font-family: inherit; /* Ensures textarea uses the body font */
+    font-family: var(--font-body);
     resize: vertical;
     transition: border-color var(--transition-speed), box-shadow var(--transition-speed);
 }
@@ -97,53 +117,60 @@ textarea {
 textarea:focus {
     outline: none;
     border-color: var(--color-primary);
-    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+    box-shadow: 0 0 0 4px rgba(26, 115, 232, 0.2);
 }
 
 .button {
-    padding: 0.8rem 1.5rem;
+    padding: 0.8rem 2rem;
     font-size: 1.1rem;
-    font-weight: bold;
+    font-weight: 500;
+    font-family: var(--font-body);
     color: #fff;
     background-color: var(--color-primary);
     border: none;
     border-radius: var(--border-radius);
     cursor: pointer;
-    transition: background-color var(--transition-speed), transform var(--transition-speed);
-    align-self: center; /* Makes buttons in flex containers only as wide as their content */
+    transition: all var(--transition-speed) ease;
+    align-self: center;
 }
 
 .button:hover {
     background-color: var(--color-primary-dark);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    transform: translateY(-2px);
 }
 
 .button:active {
-    transform: scale(0.98); /* Gives a nice "press" effect */
+    transform: translateY(0);
 }
 
-/* For keyboard users */
-.button:focus-visible {
-    outline: 2px solid var(--color-primary);
-    outline-offset: 3px;
+/* --- 6. Specific UI States --- */
+
+/* "Server Asleep" UI - The Corgi! */
+.corgi-container {
+    animation: breathe 4s ease-in-out infinite;
+    /* This element is now a <figure>, but the class works the same */
 }
 
-/* --- 4. Specific UI States --- */
-
-/* "Server Asleep" UI elements */
 #corgi-img {
-    max-width: 150px; /* Reduced size slightly for a cleaner look */
-    margin: 0 auto;
-    border-radius: var(--border-radius);
-    margin-block-end: 1rem; /* Replaces the old inline style */
+    max-width: 140px;
+    border-radius: 50%;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    margin-bottom: 1.5rem;
 }
 
-#server-asleep-ui h2 {
-    margin-block: 0.5rem;
+/* ** NEW RULE HERE ** */
+.corgi-caption {
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    margin-top: -1rem;
+    font-style: italic;
 }
 
 #server-asleep-ui p {
-    max-width: 45ch; /* Limits line length for better readability */
+    max-width: 45ch;
     margin-inline: auto;
+    color: var(--color-text-muted);
 }
 
 /* "Results" UI */
@@ -153,25 +180,9 @@ textarea:focus {
     background-color: var(--color-surface);
     border-radius: var(--border-radius);
     box-shadow: var(--shadow);
-    opacity: 0; /* Use opacity for a fade-in effect */
-    transform: translateY(10px);
     transition: opacity 0.4s ease, transform 0.4s ease;
 }
 
-/* We'll change the 'hidden' class logic slightly in our minds */
-/* Instead of display:none, we control visibility to allow for animation */
-.hidden {
-    display: none;
-}
-
-/* A potential JS-driven class for smooth appearance */
-.result-container.visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-
-/* --- 5. Utility & Helper Classes --- */
 .hidden {
     display: none;
 }
